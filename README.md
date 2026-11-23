@@ -10,12 +10,12 @@ Aplicação mobile desenvolvida em **React Native** e **TypeScript** (ecossistem
 
 ## 📋 Sobre o Projeto
 
-Cartazes físicos de adoção espalhados pelas ruas sofrem com desatualização imediata, falta de espaço para informações médicas do animal e ausência de direcionamento geográfico até o abrigo. 
+Cartazes físicos de adoção espalhados pelas ruas sofrem com desatualização imediata, falta de espaço para informações médicas do animal e ausência de direcionamento geográfico até o abrigo.
 
 O **AuMigo** resolve esse gargalo utilizando os sensores nativos do smartphone (Câmara e GPS):
 1. O cidadão aponta a câmara do aplicativo para o **QR Code** impresso no cartaz físico.
 2. O sistema intercepta o protocolo de **Deep Linking** (`aumigo://pet/{id}`), extrai o identificador do animal e abre sua ficha completa em tempo real.
-3. Através da geolocalização (WGS-84), o app exibe no mapa interativo a posição atual do usuário e os abrigos parceiros em Recife (como o **Hospital Veterinário do Recife** e a **ONG Anjos do Poço**).
+3. Através da geolocalização (WGS-84), o app exibe no mapa interativo a posição atual do usuário e os abrigos parceiros em Recife, como o **Hospital Veterinário do Recife** (Cordeiro) e a **ONG Anjos do Poço** (Poço da Panela).
 
 ---
 
@@ -37,13 +37,20 @@ O **AuMigo** resolve esse gargalo utilizando os sensores nativos do smartphone (
 ```text
 src/
 ├── components/
-│   ├── QRScanner.tsx        # Componente de câmara, leitura óptica e bloqueio de disparos múltiplos
-│   └── ShelterMap.tsx       # Componente de mapa vetorial, marcadores e guarda contra Ilha Nula
+│   ├── QRScanner.tsx          # Câmara, leitura óptica e bloqueio de disparos múltiplos
+│   └── ShelterMap.tsx         # Mapa vetorial, marcadores e guarda contra "Ilha Nula"
+├── data/
+│   └── mockData.ts            # Base local de pets (ex: p1) e coordenadas dos abrigos da RMR
 ├── hooks/
-│   └── useAppLocation.ts    # Hook customizado para permissões e captura assíncrona de GPS
-└── screens/
-    ├── HomeScreen.tsx       # Tela principal de navegação entre mapa e leitor
-    └── PetDetails.tsx       # Tela de ficha detalhada do animal carregada via Deep Link
+│   ├── useAppLocation.ts      # Hook customizado para permissões e captura assíncrona de GPS
+│   └── useQRResolver.ts       # Hook customizado para validação de URI e extração do petId
+├── routes/
+│   └── index.tsx              # Configuração do React Navigation e esquema Deep Link
+├── screens/
+│   ├── HomeScreen.tsx         # Tela principal de navegação entre mapa e leitor
+│   └── PetDetails.tsx         # Tela de ficha detalhada do animal carregada via Deep Link
+└── types/
+    └── index.ts               # Interfaces TypeScript (Coordinates, ShelterData, PetData)
 ```
 
 ---
@@ -51,7 +58,7 @@ src/
 ## 🛠️ Tecnologias e Bibliotecas
 
 - **React Native & Expo SDK:** Desenvolvimento multiplataforma (Android e iOS) com acesso simplificado às APIs nativas.
-- **TypeScript:** Tipagem estática para coordenadas, abrigos e resultados do scanner (`BarcodeScanningResult`).
+- **TypeScript:** Tipagem estática para coordenadas, abrigos, rotas e resultados do scanner (`BarcodeScanningResult`).
 - **expo-location:** Integração com *FusedLocationProvider* (Android) e *CoreLocation* (iOS).
 - **expo-camera:** Componente `<CameraView />` para visão computacional e leitura de códigos 2D.
 - **react-native-maps:** Renderização nativa do Google Maps / Apple Maps.
