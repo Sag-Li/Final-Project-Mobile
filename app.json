@@ -1,25 +1,50 @@
 {
   "expo": {
     "name": "AuMigo",
-    "slug": "AuMigo",
+    "slug": "aumigo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F7F9FA"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSCameraUsageDescription": "O AuMigo necessita do acesso à câmara para ler os QR Codes dos cartazes OOH.",
+        "NSLocationWhenInUseUsageDescription": "O AuMigo necessita da sua localização para exibir abrigos de animais próximos no mapa."
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#F7F9FA"
       },
-      "predictiveBackGestureEnabled": false
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "O AuMigo necessita do acesso à câmara para ler os QR Codes dos cartazes OOH."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "O AuMigo necessita da sua localização para exibir abrigos de animais próximos no mapa."
+        }
+      ]
+    ]
   }
 }
